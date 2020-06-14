@@ -189,15 +189,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     private_key = file("C:/Users/Shivangi/Downloads/AWS-keys/Seckey.pem")
     host     = aws_instance.web.public_ip
   }
-
-  provisioner "remote-exec" {
-    inline = [
-      "sudo su << EOF",
-      "echo \"background-image: <img src='http://${self.domain_name}/${aws_s3_bucket_object.object.key}'>\" >> /var/www/html/index.html",
-      "EOF"
-    ]
-  }
-
+  
   enabled             = true
   is_ipv6_enabled     = true
   comment             = "Some comment"
